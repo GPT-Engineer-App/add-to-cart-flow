@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Text } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Text, Image } from "@chakra-ui/react";
 
 const ItemDetailsModal = ({ isOpen, onClose, item, addToCart }) => {
   return (
@@ -8,6 +8,7 @@ const ItemDetailsModal = ({ isOpen, onClose, item, addToCart }) => {
         <ModalHeader>{item.name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
+          <Image src={item.image} alt={item.name} mb={2} />
           <Text>Price: ${item.price}</Text>
           <Text>Description: {item.description}</Text>
         </ModalBody>

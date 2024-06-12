@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, VStack, Image } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -26,6 +26,7 @@ const Cart = () => {
         ) : (
           cart.map((item, index) => (
             <Flex key={index} justify="space-between" w="100%" p={4} borderWidth={1} borderRadius="md">
+              <Image src={item.image} alt={item.name} boxSize="50px" mr={4} />
               <Text>{item.name}</Text>
               <Text>${item.price}</Text>
               <Button colorScheme="red" onClick={() => removeFromCart(index)}>
