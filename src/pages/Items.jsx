@@ -1,4 +1,6 @@
-import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, VStack, Input, Grid, GridItem, useDisclosure } from "@chakra-ui/react";
+import { FaSearch } from "react-icons/fa";
+import ItemDetailsModal from "../components/ItemDetailsModal.jsx";
 import { useState } from "react";
 
 const Items = () => {
@@ -7,6 +9,9 @@ const Items = () => {
     { id: 2, name: "Item 2", price: 20 },
     { id: 3, name: "Item 3", price: 30 },
   ]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const addToCart = (item) => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -15,20 +20,43 @@ const Items = () => {
     alert(`${item.name} added to cart`);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredItems = items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    onOpen();
+  };
+
   return (
     <Box p={4}>
       <Heading mb={4}>Items</Heading>
-      <VStack spacing={4}>
-        {items.map((item) => (
-          <Flex key={item.id} justify="space-between" w="100%" p={4} borderWidth={1} borderRadius="md">
+      <Flex mb={4}>
+        <Input
+          placeholder="Search items"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          mr={2}
+        />
+        <Button leftIcon={<FaSearch />} colorScheme="teal">Search</Button>
+      </Flex>
+      <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4}>
+        {filteredItems.map((item) => (
+          <GridItem key={item.id} p={4} borderWidth={1} borderRadius="md" onClick={() => handleItemClick(item)}>
             <Text>{item.name}</Text>
             <Text>${item.price}</Text>
             <Button colorScheme="teal" onClick={() => addToCart(item)}>
               Add to Cart
             </Button>
-          </Flex>
+          </GridItem>
         ))}
-      </VStack>
+      </Grid>
+      {selectedItem && (
+        <ItemDetailsModal isOpen={isOpen} onClose={onClose} item={selectedItem} addToCart={addToCart} />
+      )}
     </Box>
   );
 };
