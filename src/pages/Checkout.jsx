@@ -28,7 +28,7 @@ const Checkout = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box p={4} position="relative" minHeight="100vh">
       <Heading mb={4}>Checkout</Heading>
       <VStack spacing={4} align="stretch">
         {cart.map((item, index) => (
@@ -54,13 +54,15 @@ const Checkout = () => {
             <FormLabel>Card Number</FormLabel>
             <Input name="cardNumber" value={formData.cardNumber} onChange={handleChange} />
           </FormControl>
+        </VStack>
+        <Flex position="absolute" bottom={4} left={0} right={0} justifyContent="center" gap={4}>
           <Button type="submit" colorScheme="teal">
             Place Order
           </Button>
-          <Button as={RouterLink} to="/items" colorScheme="teal" mt={4}>
+          <Button as={RouterLink} to="/items" colorScheme="teal">
             Add More Items
           </Button>
-        </VStack>
+        </Flex>
       </form>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Text, Image } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, Text, Image, Flex } from "@chakra-ui/react";
 
 const ItemDetailsModal = ({ isOpen, onClose, item, addToCart }) => {
   return (
@@ -13,10 +13,12 @@ const ItemDetailsModal = ({ isOpen, onClose, item, addToCart }) => {
           <Text>Description: {item.description}</Text>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="teal" mr={3} onClick={() => { addToCart(item); onClose(); }}>
-            Add to Cart
-          </Button>
-          <Button variant="ghost" onClick={onClose}>Close</Button>
+          <Flex justifyContent="center" gap={4}>
+            <Button colorScheme="teal" onClick={() => { addToCart(item); onClose(); }}>
+              Add to Cart
+            </Button>
+            <Button variant="ghost" onClick={onClose}>Close</Button>
+          </Flex>
         </ModalFooter>
       </ModalContent>
     </Modal>

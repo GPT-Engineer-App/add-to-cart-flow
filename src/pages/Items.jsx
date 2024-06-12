@@ -49,9 +49,11 @@ const Items = () => {
             <Image src={item.image} alt={item.name} mb={2} />
             <Text>{item.name}</Text>
             <Text>${item.price}</Text>
-            <Button colorScheme="teal" onClick={() => addToCart(item)}>
-              Add to Cart
-            </Button>
+            <Flex justifyContent="center">
+              <Button colorScheme="teal" onClick={() => addToCart(item)}>
+                Add to Cart
+              </Button>
+            </Flex>
           </GridItem>
         ))}
       </Grid>

@@ -18,7 +18,7 @@ const Cart = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box p={4} position="relative" minHeight="100vh">
       <Heading mb={4}>Cart</Heading>
       <VStack spacing={4}>
         {cart.length === 0 ? (
@@ -37,9 +37,11 @@ const Cart = () => {
         )}
       </VStack>
       {cart.length > 0 && (
-        <Button as={RouterLink} to="/checkout" colorScheme="teal" mt={4}>
-          Proceed to Checkout
-        </Button>
+        <Flex position="absolute" bottom={4} left={0} right={0} justifyContent="center">
+          <Button as={RouterLink} to="/checkout" colorScheme="teal" mt={4}>
+            Proceed to Checkout
+          </Button>
+        </Flex>
       )}
     </Box>
   );
