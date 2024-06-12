@@ -1,5 +1,6 @@
-import { Box, Button, FormControl, FormLabel, Heading, Input, VStack } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Heading, Input, VStack, Link as RouterLink } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,9 @@ const Checkout = () => {
           </FormControl>
           <Button type="submit" colorScheme="teal">
             Place Order
+          </Button>
+          <Button as={RouterLink} to="/items" colorScheme="teal" mt={4}>
+            Add More Items
           </Button>
         </VStack>
       </form>
